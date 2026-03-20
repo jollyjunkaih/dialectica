@@ -1,0 +1,37 @@
+{
+  "name": "dialectica",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "prisma": {
+    "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
+  },
+  "dependencies": {
+    "@prisma/client": "^5.22.0",
+    "@tiptap/extension-typography": "^3.20.4",
+    "@tiptap/react": "^3.20.4",
+    "@tiptap/starter-kit": "^3.20.4",
+    "@types/node": "^25.5.0",
+    "@types/react": "^19.2.14",
+    "autoprefixer": "^10.4.27",
+    "framer-motion": "^12.38.0",
+    "next": "^14.2.35",
+    "next-auth": "^4.24.13",
+    "postcss": "^8.5.8",
+    "prisma": "^5.22.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "tailwindcss": "^4.2.2",
+    "typescript": "^5.9.3",
+    "zustand": "^5.0.12"
+  },
+  "devDependencies": {
+    "@types/react-dom": "^19.2.3",
+    "ts-node": "^10.9.2"
+  }
+}

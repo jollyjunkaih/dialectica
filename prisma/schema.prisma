@@ -1,0 +1,55 @@
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Category {
+  id        String   @id @default(cuid())
+  name      String
+  icon      String?
+  color     String?
+  slug      String   @unique
+  createdAt DateTime @default(now())
+  topics    Topic[]
+}
+
+model Topic {
+  id          String   @id @default(cuid())
+  title       String
+  description String?
+  slug        String   @unique
+  categoryId  String
+  category    Category @relation(fields: [categoryId], references: [id])
+  coverColor  String   @default("#6366f1")
+  status      String   @default("PUBLISHED")
+  nodes       Node[]
+  createdAt   DateTime @default(now())
+}
+
+model Node {
+  id        String   @id @default(cuid())
+  title     String
+  body      String?
+  type      String   @default("QUESTION")
+  topicId   String
+  topic     Topic    @relation(fields: [topicId], references: [id])
+  parentId  String?
+  parent    Node?    @relation("NodeChildren", fields: [parentId], references: [id])
+  children  Node[]   @relation("NodeChildren")
+  order     Int      @default(0)
+  status    String   @default("PUBLISHED")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model User {
+  id        String   @id @default(cuid())
+  name      String?
+  email     String   @unique
+  role      String   @default("READER")
+  createdAt DateTime @default(now())
+}
