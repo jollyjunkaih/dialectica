@@ -23,7 +23,7 @@ model Topic {
   description String?
   slug        String   @unique
   categoryId  String
-  category    Category @relation(fields: [categoryId], references: [id])
+  category    Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
   coverColor  String   @default("#6366f1")
   status      String   @default("PUBLISHED")
   nodes       Node[]
@@ -36,9 +36,9 @@ model Node {
   body      String?
   type      String   @default("QUESTION")
   topicId   String
-  topic     Topic    @relation(fields: [topicId], references: [id])
+  topic     Topic    @relation(fields: [topicId], references: [id], onDelete: Cascade)
   parentId  String?
-  parent    Node?    @relation("NodeChildren", fields: [parentId], references: [id])
+  parent    Node?    @relation("NodeChildren", fields: [parentId], references: [id], onDelete: Cascade)
   children  Node[]   @relation("NodeChildren")
   order     Int      @default(0)
   status    String   @default("PUBLISHED")
@@ -47,9 +47,10 @@ model Node {
 }
 
 model User {
-  id        String   @id @default(cuid())
-  name      String?
-  email     String   @unique
-  role      String   @default("READER")
-  createdAt DateTime @default(now())
+  id           String   @id @default(cuid())
+  name         String?
+  email        String   @unique
+  passwordHash String?
+  role         String   @default("READER")
+  createdAt    DateTime @default(now())
 }
