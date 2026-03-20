@@ -3,7 +3,8 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Dialectica - Infinite Knowledge CMS",
-  description: "An infinite recursive knowledge management system with 3D bookshelf navigation",
+  description:
+    "An infinite recursive knowledge management system with 3D bookshelf navigation",
 };
 
 export default function RootLayout({
@@ -13,7 +14,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="antialiased">{children}</body>
+      <body className="antialiased min-h-screen">{children}</body>
     </html>
   );
 }
