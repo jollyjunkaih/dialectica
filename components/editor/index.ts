@@ -1,3 +1,1 @@
-// Editor components - CMS editing with Tiptap
-// To be implemented: RichTextEditor, NodeEditor, TopicEditor
-export {};
+export { default as TiptapEditor } from "./TiptapEditor";

@@ -1,9 +1,21 @@
-export default function Home() {
+import { BookshelfScene } from "@/components/bookshelf";
+import type { CategoryWithTopics } from "@/lib/types";
+
+async function getCategories(): Promise<CategoryWithTopics[]> {
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"}/api/categories`,
+    { cache: "no-store" }
+  );
+  if (!res.ok) return [];
+  return res.json();
+}
+
+export default async function Home() {
+  const categories = await getCategories();
+
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center p-24">
-      <h1 className="text-6xl font-bold text-white mb-4">Dialectica</h1>
-      <p className="text-xl text-gray-400">Infinite Knowledge CMS</p>
-      <p className="text-sm text-gray-500 mt-8">3D Bookshelf coming soon...</p>
+    <main className="min-h-screen">
+      <BookshelfScene categories={categories} />
     </main>
   );
 }
